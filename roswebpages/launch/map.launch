@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<launch>
+	<arg name="version" default="fuerte"/>
+	<include file="$(find roswebpages)/launch/$(arg version).launch"/>
+
+	<!-- Run map server (may need to install ros-VERSION-rail-maps via APT-->
+  	<node name="map_server" pkg="map_server" type="map_server" 
+        args="$(find rails_map)/maps/ilab.pgm 0.05" />
+
+</launch>

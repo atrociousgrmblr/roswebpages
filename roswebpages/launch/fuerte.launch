@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+	<!-- Webserver + API (usefull to get informations via services) -->
+	<include file="$(find rosbridge_launch)/launch/simple.launch"/>
+
+	<!-- roswww puts your www folder on the webserver -->
+	<param name="http/default" value="8080" />
+  	<node name="roswww" pkg="roswww" type="webserver.py" />
+</launch>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<launch>
+	<arg name="version" default="fuerte"/>
+	<include file="$(find roswebpages)/launch/$(arg version).launch"/>
+
+    <!-- MjpegServer -->
+    <arg name="mjpeg_port" default="8081"/>
+    <param name="http/mjpeg" value="$(arg mjpeg_port)"/>
+    <node pkg="mjpeg_server" type="mjpeg_server" 
+            name="mjpeg_server" output="screen" >
+        <param name="port" value="$(arg mjpeg_port)" />
+    </node>
+
+    <!-- Launch a webcam with uvc camera -->
+    <arg name="camera" default="true"/>
+    <include file="$(find uvc_camera)/launch/camera_node.launch"
+            if="$(arg camera)"/>
+
+</launch>

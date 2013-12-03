@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<launch>
+	<arg name="version" default="fuerte"/>
+	<include file="$(find roswebpages)/launch/$(arg version).launch"/>
+
+	<!-- Run 2 action servers that can be run anywhere -->
+  	<node name="averaging" pkg="actionlib_tutorials" 
+		type="averaging_server" />
+  	<node name="fibonacci" pkg="actionlib_tutorials" 
+		type="fibonacci_server" />
+
+</launch>

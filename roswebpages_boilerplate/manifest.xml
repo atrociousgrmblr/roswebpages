@@ -1,0 +1,16 @@
+<package>
+  <description brief="roslibjs_boilerplate">
+
+     roswebpages_boilerplate: 
+        A template to create ROS webpage using roslibjs
+     	and roswww. It uses initializr (h5bp + bootstrap).
+
+  </description>
+  <author>Adrien Tronche, Introlab</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/roswebpages_boilerplate</url>
+
+</package>
+
+

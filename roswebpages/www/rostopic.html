@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 30px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1>Topics</h1>
+                <p class="lead">
+                    Subscribe, publish and get information on topics.
+                </p>
+                <div class="input-append push-right">
+                    <input id="text-host" type="text" 
+                        class="input-small" value="">
+                    <button id="btn-connect" class="btn btn-primary"
+                        data-loading-text="Connecting..."
+                        data-complete-text="Connected">
+                            Connect
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- A multipurpose alert -->
+        <div class="alert alert-error fade in" 
+                style="display:none;" id="alert">
+            <a class="close" onclick="javascript:$('#alert').hide();" 
+                    href="#">&times;</a>
+            <p id="text-alert"></p>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12" id="actions" style="display:none;">
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="text-topic">
+                            Search topics
+                        </label>
+                        <div class="controls form-search">
+                            <div class="input-append">
+                                <input id="text-topic" type="text" 
+                                        class="search-query" 
+                                        data-provide="typeahead">
+                                <button class="btn" 
+                                        onclick="javascript:listTopics();">
+                                    List
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="btn-group">
+                                <button id="btn-subscribe" 
+                                        class="btn btn-info"
+                                        data-subscribe-text="Subscribe"
+                                        data-unsubscribe-text="Subscribed">
+                                    Subscribe
+                                </button>
+                                <button id="btn-publish" 
+                                        class="btn btn-info">
+                                    Publish
+                                </button>
+                                <button id="btn-information" 
+                                        class="btn btn-info">
+                                    Information
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid" id="message" style="display:none;">
+            <div class="span12">
+                <br>
+                <p>
+                    Topic type is <code id="type"></code>
+                </p>
+                <table class="table table-striped table-bordered" 
+                        id="table-topic">
+                    <thead>
+                        <tr><th>Field</th><th>Value</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- Message will go there -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row-fluid" id="unsubscribe" style="display:none;" >
+            <div class="span12">
+                <button class="btn btn-danger" id="btn-unsubscribe">
+                    <i class="icon-white icon-off"></i> Unsubscribe
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for listing -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="modal hide" id="modal-list" tabindex="-1"
+                    role="dialog" aria-labelledby="modal-list-name">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                        data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h3 id="modal-list-name">Topics List</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-condensed" 
+                            id="table-list">
+                        <thead>
+                            <tr>
+                                <th>Topic</th><th>Type</th><th>Choose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- To be filled -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for publication -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="modal hide" id="modal-publish" tabindex="-1"
+                    role="dialog" aria-labelledby="modal-publish-name">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                        data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h3 id="modal-publish-name">Publication</h3>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Fill message to be published on 
+                        <code id="modal-topic-publish"></code>.
+                        Message type is 
+                        <code id="modal-type-publish"></code>.
+                    </p>
+                    <div class="well well-small">
+                        <p class="text-warning">
+                            <b>Important:</b>
+                            <br>
+                            Use conform <em>JSON</em> to fill objects like 
+                            messages and array. Doing it the same way as you
+                            would with <em>rostopic</em> should work.
+                            <br>
+                            Example for a header message: 
+                            <code>{"frame_id": "world", "seq": 1}</code>
+                            <br>
+                            Example for an array of floats: 
+                            <code>[1.5, 2.5]</code>
+                        </p>
+                    </div>
+                    <div class="clearfix">
+                        <div class="input">
+                            <div class="input-prepend">
+                                <label class="add-on">
+                                    <input type="radio" name="pub-rate" 
+                                            id="once" checked>
+                                    Publish once
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="input">
+                            <div class="input-prepend">
+                                <label class="add-on">
+                                    <input type="radio" name="pub-rate"
+                                            id="hz">
+                                    Period
+                                </label>
+                                <input type="number" id="input-rate" 
+                                        placeholder="in millisecs"
+                                        class="input-small">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-primary" id="btn-modal-publish"
+                                data-publish-text="Publish"
+                                data-publishing-text="Publishing"
+                                data-published-text="Published">
+                            Publish
+                        </button>
+                        <button class="btn btn-danger" style="display:none;"
+                                id="btn-modal-cancel">
+                            Cancel
+                        </button>
+                    </div>
+                    <br>
+                    <table class="table table-striped table-condensed" 
+                            id="table-publish">
+                        <thead>
+                            <tr><th>Field</th><th>Value</th></tr>
+                        </thead>
+                        <tbody>
+                            <!-- To be filled with message details and inputs
+                                    in value field -->
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for new topics -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="modal hide" id="modal-topic" 
+                        tabindex="-1" role="dialog">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                        data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h3>New topic</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="text-info">
+                        The topic you provided does not currently exist. 
+                        Create it now!
+                    </p>
+                    <div class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label" for="topic-name">
+                                Topic name
+                            </label>
+                            <div class="controls">
+                              <input type="text" id="topic-name">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="topic-type">
+                                Message type
+                            </label>
+                            <div class="controls">
+                                <input type="text" id="topic-type">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" 
+                            data-dismiss="modal" aria-hidden="true">
+                        Close
+                    </button>
+                    <button class="btn btn-info" 
+                            data-dismiss="modal" aria-hidden="true"
+                            onclick="javascript:createTopic()">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for information -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="modal hide" id="modal-info" tabindex="-1"
+                    role="dialog" aria-labelledby="modal-info-name">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                        data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h3 id="modal-publish-name">Information</h3>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Information on <code id="modal-topic-info"></code>
+                        with message type <code id="modal-type-info"></code>.
+                    </p>
+                    <div id="modal-pubs" class="well well-small">
+                        <h4>Publishers</h4>
+                        <table class="table table-striped" id="table-pubs">
+                            <thead>
+                                <tr><th>Node</th><th>Host</th></tr>
+                            </thead>
+                            <tbody>
+                                <!-- To be filled with publishers -->
+                            </tbody> 
+                        </table>
+                    </div>
+                    <div id="modal-subs" class="well well-small">
+                        <h4>Subscribers</h4>
+                        <table class="table table-striped" id="table-subs">
+                            <thead>
+                                <tr><th>Node</th><th>Host</th></tr>
+                            </thead>
+                            <tbody>
+                                <!-- To be filled with publishers -->
+                            </tbody> 
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" 
+                            data-dismiss="modal" aria-hidden="true">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <hr/>
+            <a href="index.html" class="btn btn-warning">
+                <i class="icon-home icon-white"></i> Home
+            </a>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <script>
+        window.jQuery || 
+        document.write(
+            '<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
+    </script>
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+
+    <script src="js/ros/eventemitter2.min.js"></script>
+    <script src="js/ros/roslib.js"></script>
+
+    <script src="js/plugins.js"></script>
+
+    <script type='text/javascript'>
+       window.ros = new ROSLIB.Ros();
+    </script>
+    <script src="js/connection.js"></script>
+    <script src="js/jsonify.js"></script>
+    <script src="js/pages/rostopic.js"></script>
+</body>
+</html>

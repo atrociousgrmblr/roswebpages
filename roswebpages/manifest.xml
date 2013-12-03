@@ -1,0 +1,15 @@
+<package>
+  <description brief="web">
+
+     roswebpages: A collection of useful html pages to access ROS
+     	features. Created from the roswebpages_boilerplate package.
+
+  </description>
+  <author>Adrien Tronche, Introlab</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/roswebpages</url>
+
+</package>
+
+

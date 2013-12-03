@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 30px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h1>ROS Webpages</h1>
+                    <p class="lead">
+                        A collection of web pages that access ROS using 
+                        <a href="http://ros.org/wiki/rosbridge_suite">
+                            rosbridge_suite</a>.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Create new row every 3 to avoid some ugly alignements -->
+
+            <!-- ROS Command line tools -->
+            <h2>Command-line Tools</h2>
+            <div class="row-fluid">
+                <div class="span3 well">
+                    <h3>Topics</h3>
+                    <p>
+                        Subscribe, publish and get information on ROS
+                        topics.
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>rostopic</code>
+                    </p>
+                    <p><a class="btn btn-info" href="rostopic.html">View</a>
+                    </p>
+                </div>
+                <div class="span3 well">
+                    <h3>Services</h3>
+                    <p>
+                        Call and get information on ROS services.
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>rosservice</code>
+                    </p>
+                    <p><a class="btn btn-info" href="rosservice.html">View</a>
+                    </p>
+                </div>
+                <div class="span3 well">
+                    <h3>Nodes</h3>
+                    <p>
+                        List and get information on ROS nodes.
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>rosnode</code>
+                    </p>
+                    <p><a class="btn btn-info" href="rosnode.html">View</a>
+                    </p>
+                </div>
+                <div class="span3 well">
+                    <h3>Parameters</h3>
+                    <p> 
+                        List, edit and delete ROS parameters.
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>rosparam</code>
+                    </p>
+                    <p><a class="btn btn-info" href="rosparam.html">View</a>
+                    </p>
+                </div>
+            </div>
+
+            <h2>TF Tools</h2>
+            <div class="row-fluid">
+                <div class="span4 well">
+                    <h3>TF View frames</h3>
+                    <p>
+                        Display the TF tree using the
+                        <a href="http://raphaeljs.com">raphael</a> 
+                        drawing library.
+                    </p>
+                    <p class="text-warning">
+                        Don't expect great things if your tree is broken!
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>tf view_frames</code>
+                    </p>
+                    <p><a class="btn btn-info" href="view_frames.html">View</a>
+                    </p>
+                </div>
+                <div class="span4 well">
+                    <h3>TF Echo</h3>
+                    <p>
+                        Listen to transform between 2 TF frames. Needs a 
+                        running <code>tf2_web_republisher</code> to work.
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>tf tf_echo</code>
+                    </p>
+                    <p><a class="btn btn-info" href="tf_echo.html">View</a>
+                    </p>
+                </div>
+            </div>
+
+            <h2>Advanced Tools</h2>
+            <div class="row-fluid">
+                <div class="span4 well">
+                    <h3>Logger</h3>
+                    <p>
+                        Display ROS <code>/rosout</code> logs in a 
+                        <a href="http://datatable.net">DataTable</a>.
+                        You can sort and perform searchs on the table.
+                    </p>
+                    <p><a class="btn btn-info" href="logger.html">View</a>
+                    </p>
+                </div>
+                <div class="span4 well">
+                    <h3>Action Client</h3>
+                    <p>
+                        A generic action client that you can use with 
+                        any action. Complex fields have to be filled using
+                        <code>JSON</code>.
+                    </p>
+                    <p><a class="btn btn-info" 
+                            href="action_client.html">View</a>
+                    </p>
+                </div>
+            </div>
+
+            <h2>Display Tools</h2>
+            <div class="row-fluid">
+                <div class="span4 well">
+                    <h3>Image Viewer</h3>
+                    <p>
+                        Watch <code>sensor_msgs/Image</code> image topics
+                        using 
+                        <a href="http://ros.org/wiki/mjpegserver">mjpegserver
+                        </a>. 
+                    </p>
+                    <p class="text-info">
+                        Command-line equivalent: <code>image_view</code>
+                    </p>
+                    <p><a class="btn btn-info" href="image_view.html">View</a>
+                    </p>
+                </div>
+                <div class="span4 well">
+                    <h3>Map Viewer</h3>
+                    <p>
+                        Display <code>nav_msgs/OccupancyGrid</code> 
+                        topics using 
+                        <a href="https://github.com/RobotWebTools/ros2djs">
+                            ros2djs</a>. 
+                    </p>
+                    <p><a class="btn btn-info" href="map_view.html">View</a>
+                    </p>
+                </div>
+            </div>
+
+            <footer>
+                <hr/>
+                Created by 
+                <a href="mailto:tronche.adrien@gamail.com">Adrien Tronche</a>
+                at <a href="http://introlab.3it.usherbrooke.ca">IntRoLab</a>.
+                Powered by
+                <a href="http://twitter.github.io/bootstrap">Bootstrap</a> and
+                <a href="http://robotwebtools.org">RobotWebTools</a>.
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.Min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+
+    </body>
+</html>
